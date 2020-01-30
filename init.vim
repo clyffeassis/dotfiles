@@ -13,28 +13,46 @@ Plug 'valloric/youcompleteme'
 Plug 'scrooloose/nerdtree'
 call plug#end()
 
+" Função para copiar e colar do clipboard do sistema 
+set clipboard+=unnamedplus
+function! ClipboardYank()
+    call system('xclip -i -selection clipboard', @@)
+endfunction
+function! ClipboardPaste()
+    let @@ = system('xclip -o -selection clipboard')
+endfunction
+vnoremap <silent> y y:call ClipboardYank()<cr>
+vnoremap <silent> d d:call ClipboardYank()<cr>
+nnoremap <silent> p :call ClipboardPaste()<cr>
+" -------------------------------------------------
+"  Color scheme (Tema)
 colorscheme gruvbox
 set background=dark
-
+" Permite abrir novos arquivos sem salvar anterior
 set hidden
-
+" numera linhas
 set number
+" numera relativamente
 set relativenumber
 set termguicolors
-
+" Habilita mouse
 set mouse=a
-set clipboard+=unnamedplus
+" Habilita split horizontal quando substituindo (%s)
 set inccommand=split
-set clipboard=unnamed
+" Configura tabulação e identação
 set expandtab
 set shiftwidth=4
 set tabstop=8     
 set autoindent   
 set smartindent 
 set cindent    
+" Configura fold para casar com a sintaxe do codigo
 set foldmethod=syntax
+" Abre o arquivo sem dobrar (fold)
 set nofoldenable
-let mapleader="\<space>"
+" Tecla leader
+let mapleader=","
+" Atalhos
 nnoremap <leader>; A;<esc>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <c-p> :Files<cr>
