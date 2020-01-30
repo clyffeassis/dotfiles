@@ -23,7 +23,7 @@ set relativenumber
 set termguicolors
 
 set mouse=a
-
+set clipboard+=unnamedplus
 set inccommand=split
 set clipboard=unnamed
 set expandtab
